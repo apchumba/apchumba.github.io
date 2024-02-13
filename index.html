@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Моей Арайке :)</title>
+    <style>
+        body {
+            background-color: #ffceed;
+            font-family: 'Pacifico', cursive;
+            overflow: hidden;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            -webkit-tap-highlight-color: transparent;
+            width: 100%;
+            height: 100vh;
+            transition: .4s ease-in-out;
+        }
+
+        @keyframes heartfade {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .heart {
+            z-index: 999;
+            animation: heartfade 6s linear;
+            position: absolute;
+        }
+
+        .heart:before,
+        .heart:after {
+            content: "";
+            background-color: #632D5D;
+            position: absolute;
+            height: 30px;
+            width: 45px;
+            border-radius: 15px 0px 0px 15px;
+        }
+
+        .heart:before {
+            transform: rotate(45deg);
+        }
+
+        .heart:after {
+            left: 10.5px;
+            transform: rotate(135deg);
+        }
+
+        .bgoverlay {
+            background: rgba(103, 58, 183, 0.7);
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        .container {
+            position: relative;
+            margin: 120px auto 0 auto;
+            width: 320px;
+        }
+
+        .ico {
+            display: block;
+            width: 320px;
+            height: 320px;
+        }
+
+        .open .ico {
+            animation: open 4s;
+            transform: scale(10);
+        }
+
+        .ico .title {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-left: -95px;
+            margin-top: -73px;
+            z-index: 4;
+            font-size: 50px;
+            color: #fff;
+            cursor: pointer;
+            text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .open .ico .title {
+            opacity: 0;
+            transition: all 0.3s ease;
+            top: -100px;
+        }
+
+        .ico:before,
+        .ico:after,
+        .ico2:before,
+        .ico2:after {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: block;
+            font-size: 20em;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .ico:before,
+        .ico:after,
+        .ico2:before,
+        .ico2:after {
+            content: "\f004";
+            font-family: FontAwesome;
+        }
+
+        .ico2:before,
+        .ico2:after {
+            color: #e91e63;
+        }
+
+        .ico:before {
+            z-index: 3;
+            color: #ff4081;
+        }
+
+        .ico:after {
+            animation: explode 4s infinite;
+        }
+
+        .ico2:before {
+            animation: explodeSmall 3s infinite;
+        }
+
+        .ico2:after {
+            animation: explodeSmall 2s infinite;
+        }
+
+        .endtext {
+            opacity: 0;
+            position: absolute;
+            top: -100px;
+            width: 100%;
+        }
+
+        .open .endtext {
+            top: 0;
+            opacity: 1;
+            animation: show 5s;
+        }
+
+        .endtext .close {
+            position: absolute;
+            top: 0;
+            right: 0;
+            cursor: pointer;
+            text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .endtext h1,
+        .endtext h2,
+        .endtext h3 {
+            text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            font-weight: normal;
+        }
+
+        .endtext h1 {
+            font-size: 50px;
+        }
+
+        .endtext h2 {
+            font-size: 30px;
+        }
+
+        .endtext h3 {
+            font-size: 20px;
+        }
+
+        @keyframes explode {
+            from {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            to {
+                transform: scale(1.6);
+                opacity: 0;
+            }
+        }
+
+        @keyframes explodeSmall {
+            from {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            to {
+                transform: scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        @keyframes open {
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(10);
+            }
+        }
+
+        @keyframes show {
+            from {
+                opacity: 0;
+                top: -100px;
+            }
+
+            to {
+                opacity: 1;
+                top: 0;
+            }
+        }
+
+        .button-container {
+    text-align: center; /* Выравнивание кнопок по центру */
+    margin-top: 20px; /* Расстояние сверху */
+}
+
+.button-container button {
+    font-family: 'Pacifico', cursive; /* Шрифт кнопок */
+    background-color: #632D5D; /* Цвет фона кнопки "Да" */
+    color: white; /* Цвет текста кнопки "Да" */
+    border: none; /* Убираем границу */
+    border-radius: 10px; /* Закругляем углы */
+    padding: 10px 20px; /* Отступы внутри кнопки */
+    margin: 0 10px; /* Отступы между кнопками */
+    cursor: pointer; /* Изменяем указатель при наведении */
+    transition: background-color 0.3s; /* Плавное изменение цвета фона */
+}
+
+.button-container button:hover {
+    background-color: #94418C; /* Изменяем цвет фона при наведении на кнопку "Нет" */
+}
+
+.button-container button:active {
+    transform: scale(0.95); /* Уменьшаем размер кнопки при нажатии */
+}
+
+    </style>
+</head>
+<body>
+<script>
+    var brd = document.createElement("DIV");
+    document.body.insertBefore(brd, document.getElementById("board"));
+
+    const duration = 3000;
+    const speed = 0.5;
+    const cursorXOffset = 0;
+    const cursorYOffset = -5;
+
+    var hearts = [];
+
+    function generateHeart(x, y, xBound, xStart, scale) {
+        var heart = document.createElement("DIV");
+        heart.setAttribute('class', 'heart');
+        brd.appendChild(heart);
+        heart.time = duration;
+        heart.x = x;
+        heart.y = y;
+        heart.bound = xBound;
+        heart.direction = xStart;
+        heart.style.left = heart.x + "px";
+        heart.style.top = heart.y + "px";
+        heart.scale = scale;
+        heart.style.transform = "scale(" + scale + "," + scale + ")";
+        if (hearts == null)
+            hearts = [];
+        hearts.push(heart);
+        return heart;
+    }
+
+    var before = Date.now();
+    var id = setInterval(frame, 5);
+
+    // Define different frequencies (intervals) for heart appearance
+    var frequencies = [500, 800, 1200, 1500];
+
+    // Generate hearts with different frequencies
+    frequencies.forEach(function (frequency) {
+        setInterval(function () {
+            check();
+        }, frequency);
+    });
+
+    function frame() {
+        var current = Date.now();
+        var deltaTime = current - before;
+        before = current;
+        for (i in hearts) {
+            var heart = hearts[i];
+            heart.time -= deltaTime;
+            if (heart.time > 0) {
+                heart.y -= speed;
+                heart.style.top = heart.y + "px";
+                heart.style.left = heart.x + heart.direction * heart.bound * Math.sin(heart.y * heart.scale / 30) / heart.y * 200 + "px";
+            } else {
+                heart.parentNode.removeChild(heart);
+                hearts.splice(i, 1);
+            }
+        }
+    }
+
+    function check() {
+        var x = Math.random() * window.innerWidth; // Random x-coordinate within window width
+        var y = Math.random() * window.innerHeight; // Random y-coordinate within window height
+        var start = 1 - Math.round(Math.random()) * 2;
+        var scale = Math.random() * Math.random() * 0.8 + 0.2;
+        var bound = 30 + Math.random() * 20;
+        generateHeart(x, y, bound, start, scale);
+    }
+</script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous">
+<div class="bgoverlay">
+    <div class="container">
+      <span class="ico">
+        <span class="ico2"></span>
+        <span class="title">Нажми!</span>
+      </span>
+        <div class="endtext">
+            <span class="close" title="Restart"><i class="fa fa-times"></i></span>
+            <h1>Арайка, я люблю тебя!</h1>
+            <h2>Станешь ли ты моей валентинкой?</h2>
+            
+            <div class="button-container">
+                <div id="phrase-container">
+                    <p id="phrase" style="display:none;"></p>
+                </div>
+                <button id="yes">Да</button>
+                <button id="no">Нет</button>
+                
+                <script>
+                    // Получаем кнопки "да" и "нет" по их идентификаторам
+                    const yesBtn = document.getElementById("yes");
+                    const noBtn = document.getElementById("no");
+                
+                    // Получаем контейнер для фраз
+                    const phraseContainer = document.getElementById("phrase");
+                
+                    // Назначаем обработчик события на нажатие кнопки "нет"
+                    noBtn.addEventListener("click", () => {
+                        // Получаем все фразы
+                        const phrases = [
+                            "Хорошенько подумай",
+                            "Ты уверена?",
+                            "ТОЧНО НЕТ???",
+                            "Два раза спрашивать не буду..",
+                            "ЭЭЭЙ так не пойдёёёт",
+                            "Хватит играть со мной!",
+                            "Жаным, подумай ещё раз :)",
+                            "ТЫ ПРИКАЛЫВАЕШЬСЯ?!",
+                            "ПОЧЕМУ? :(",
+                            "Думай, думай, умничка!", 
+                            "Остановись, пока не поздно!"
+                        ];
+                
+                        // Генерируем случайный индекс для выбора одной из фраз
+                        const randomIndex = Math.floor(Math.random() * phrases.length);
+                
+                        // Отображаем выбранную случайную фразу
+                        phraseContainer.textContent = phrases[randomIndex];
+                        phraseContainer.style.display = "block";
+                    });
+                
+                    // Назначаем обработчик события на нажатие кнопки "да"
+                    yesBtn.addEventListener("click", () => {
+                        // Отображаем надпись "УРАААА"
+                        phraseContainer.textContent = "УРАААА ДА ЗДРАВСТВУЕТ ДЕНЬ СВЯТОГО ВАЛЕНТИНА!";
+                        phraseContainer.style.display = "block";
+                    });
+                </script>
+                
+            <h3>~твой Амишка</h3>
+          </div>
+    </div>
+</div>
+<script id="rendered-js" >
+    $(document).ready(function () {
+      $('.title').click(function () {
+        $('.container').addClass('open');
+      });
+    
+    
+      $('.close').click(function () {
+        $('.container').removeClass('open');
+      });
+    });
+    //# sourceURL=pen.js
+        </script>
+</body>
+</html>
