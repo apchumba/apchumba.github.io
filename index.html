@@ -17,7 +17,9 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+html,body{max-width:100%;overflow-x:clip}
 body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5}
+.org,.full,.cat>span:first-child,.row>span:first-child,h1,h2{overflow-wrap:anywhere}
 .wrap{max-width:880px;margin:0 auto;padding:0 20px}
 
 /* ── Шапка ── */
@@ -47,7 +49,7 @@ input:focus-visible,select:focus-visible,button:focus-visible,.cat:focus-visible
 
 /* ── Каталог (пустое состояние) ── */
 .cat-title{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:26px 0 10px}
-.catalog{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:2px 28px;padding-bottom:40px}
+.catalog{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(340px,100%),1fr));gap:2px 28px;padding-bottom:40px}
 .cat{display:flex;align-items:baseline;gap:8px;width:100%;padding:7px 4px;border:0;background:none;
   font:inherit;font-size:.95rem;color:var(--ink);text-align:left;cursor:pointer;border-radius:6px}
 .cat:hover{background:var(--accent-soft);color:var(--accent-ink)}
@@ -81,9 +83,19 @@ input:focus-visible,select:focus-visible,button:focus-visible,.cat:focus-visible
 .footnote p{margin-bottom:8px;max-width:70ch}
 .footnote .star{color:var(--gold-ink);font-weight:700}
 @media (max-width:560px){
+  .wrap{padding:0 14px}
+  header.hero{padding:26px 0 18px}
+  h1{font-size:1.5rem}
+  .eyebrow{letter-spacing:.06em;font-size:.66rem}
+  .stats{gap:.3rem .9rem;font-size:.78rem}
+  .searchbox input,select{font-size:16px;padding:11px 40px 11px 12px}
+  select{padding:11px 12px}
   .catalog{grid-template-columns:1fr}
+  .cat{font-size:.9rem}
+  .group h2{font-size:1.12rem}
   .card{padding:13px 14px}
   .card-head{flex-direction:column;gap:4px}
+  .row{font-size:.88rem}
 }
 </style>
 </head>
